@@ -1,7 +1,7 @@
 
 import App from "../backend/app.js";
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 const initializeApp = async () => {
     try {
