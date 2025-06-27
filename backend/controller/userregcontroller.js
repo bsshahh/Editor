@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 
 const userregcontroller = {
   createUser: async (req, res) => {
+    console.log("hii",req.body);
     try {
       const { firstname, lastname, email, password, mobile, role,designation, organization, admincode } =
         req.body;
