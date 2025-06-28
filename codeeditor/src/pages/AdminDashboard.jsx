@@ -41,10 +41,9 @@ const AdminDashboard = () => {
     }
   };
   const formatDateForInput = (date) => {
-    const d = new Date(date);
-    const offset = d.getTimezoneOffset();
-    const localDate = new Date(d.getTime() - offset * 60000);
-    return localDate.toISOString().slice(0, 16); // Format: YYYY-MM-DDTHH:mm
+    
+    return new Date(date).toISOString();
+
   };
 
   const handleEditClick = (test) => {
