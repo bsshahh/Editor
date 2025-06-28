@@ -255,7 +255,7 @@ const AdminDashboard = () => {
                 <p>
                   ⏱️ <span className="font-semibold">End :</span>{" "}
                   <span className="text-indigo-900">
-                    {formatToIST(test.startTime)}
+                    {formatToIST(test.endTime)}
                   </span>
                 </p>
               </div>
