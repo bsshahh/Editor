@@ -101,12 +101,14 @@ const Dashboard = () => {
                   <span className="font-bold">{user.firstname}</span>
                 </p>
               </div>
+              <div className="flex flex-wrap gap-3 justify-end">
               <button
                 onClick={handleLogout}
                 className="bg-gradient-to-r from-purple-500 to-pink-500 font-serif hover:from-purple-700 hover:to-pink-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all"
               >
                 Logout
               </button>
+              </div>
             </div>
 
             {/* Problems Section */}

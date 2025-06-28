@@ -7,7 +7,10 @@ export const getAvailableTests = async (req, res) => {
     const now = new Date();
     // console.log(userCollege);
     const tests = await Test.find({
-      college: userCollege,
+      $or:[
+        {college: userCollege},
+        {college: "ALL"},
+      ],
     //   startTime: { $lte: now },
     //  endTime: { $gt: now },
     }).lean();

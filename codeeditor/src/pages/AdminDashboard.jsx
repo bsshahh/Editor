@@ -137,7 +137,7 @@ const AdminDashboard = () => {
               </span>
             </p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3 justify-end">
             <button
               onClick={() => navigate("/admin/create-test")}
               className="bg-blue-600 font-serif hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition"

@@ -11,7 +11,7 @@ const testSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    college: { type: String, required: true },
+    college: { type: [String], required: true },
     startTime: { type: Date, required: true },
     endTime: { type: Date, required: true },
     totalMarks: { type: Number, required: true },

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
-
+import CollegeMultiSelect from "./CollegeMultiSelect";
 const CreateTest = () => {
   const navigate = useNavigate();
 
   const [test, setTest] = useState({
     title: "",
     description: "",
-    college: "",
+    college: [],
     startTime: "",
     endTime: "",
     duration: "",
@@ -77,9 +77,21 @@ const CreateTest = () => {
     });
   };
 
+  const toUTC = (localTimeStr) => {
+    const localDate = new Date(localTimeStr);
+    return new Date(
+      localDate.getTime() - localDate.getTimezoneOffset() * 60000
+    ).toISOString();
+  };
+
   const handleSubmit = async () => {
     try {
-      await axiosInstance.post("/admin/create-test", test);
+      const testwithtime = {
+        ...test,
+        startTime: toUTC(test.startTime),
+        endTime: toUTC(test.endTime),
+      };
+      await axiosInstance.post("/admin/create-test", testwithtime);
       alert("✅ Test Created");
       navigate("/admin/dashboard");
     } catch (err) {
@@ -127,16 +139,9 @@ const CreateTest = () => {
             />
           </div>
           <div>
-            <label className="font-semibold text-gray-700">
-              Target College
-            </label>
-            <input
-              type="text"
-              name="college"
+            <CollegeMultiSelect
               value={test.college}
-              onChange={handleTestChange}
-              placeholder="Enter college name"
-              className="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-blue-400"
+              onChange={(colleges) => setTest({ ...test, college: colleges })}
             />
           </div>
         </div>
