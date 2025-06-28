@@ -110,14 +110,21 @@ const AdminDashboard = () => {
       console.error("Error fetching tests", err);
     }
   };
-
+  const toUTC = (localTimeStr) => {
+    return new Date(localTimeStr).toISOString(); // Converts local "2025-06-28T19:00" to UTC
+  };
   const handleEditChange = (e) => {
     setEditForm({ ...editForm, [e.target.name]: e.target.value });
   };
 
   const handleUpdateTest = async () => {
     try {
-      await axiosInstance.put(`/admin/update-test/${editingTestId}`, editForm);
+      const updatedTest = {
+      ...editForm,
+      startTime: toUTC(editForm.startTime),
+      endTime: toUTC(editForm.endTime),
+    };
+      await axiosInstance.put(`/admin/update-test/${editingTestId}`, updatedTest);
       setEditingTestId(null);
       fetchTests(); // Refresh test list
     } catch (err) {
