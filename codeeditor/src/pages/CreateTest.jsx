@@ -78,10 +78,7 @@ const CreateTest = () => {
   };
 
   const toUTC = (localTimeStr) => {
-    const localDate = new Date(localTimeStr);
-    return new Date(
-      localDate.getTime() - localDate.getTimezoneOffset() * 60000
-    ).toISOString();
+    return new Date(localTimeStr).toISOString();
   };
 
   const handleSubmit = async () => {
