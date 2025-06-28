@@ -36,21 +36,32 @@ const Dashboard = () => {
         const submittedMap = new Map();
         userTests.forEach((ut) => submittedMap.set(ut.testId, ut));
         //  console.log(allTests);
-        
+
         const completed = [];
         const upcoming = [];
         const now = new Date();
+        const nowTime = now.getTime();
+
         allTests.forEach((test) => {
-          
-          if (test.college === userData.organization) {
+          const isCollegeMatch =
+            Array.isArray(test.college) &&
+            (test.college.includes("ALL") ||
+              test.college.includes(userData.organization));
+
+          if (isCollegeMatch) {
             const userSubmission = submittedMap.get(test._id);
             // console.log(userSubmission);
-            const isSubmitted = userSubmission?.submitted===true;
-            
+            const isSubmitted = userSubmission?.submitted === true;
+            const testStartTime = new Date(test.startTime).getTime(); // UTC ms
+            const testEndTime = new Date(test.endTime).getTime();
+
+            const isLive = testStartTime <= nowTime && testEndTime > nowTime;
+            // const isLive =
+            //   new Date(test.startTime) <= now && new Date(test.endTime) > now;
             // console.log(userSubmission);
             if (isSubmitted) {
               completed.push({ ...test, ...userSubmission });
-            } else {
+            } else if (isLive) {
               upcoming.push(test); // Only push live tests
             }
           }
@@ -96,17 +107,16 @@ const Dashboard = () => {
                   Coding Dashboard
                 </h1>
                 <p className="text-sm text-black-500">
-                  Welcome,{" "}
-                  <span className="font-bold">{user.firstname}</span>
+                  Welcome, <span className="font-bold">{user.firstname}</span>
                 </p>
               </div>
               <div className="flex flex-wrap gap-3 justify-end">
-              <button
-                onClick={handleLogout}
-                className="bg-gradient-to-r from-purple-500 to-pink-500 font-serif hover:from-purple-700 hover:to-pink-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all"
-              >
-                Logout
-              </button>
+                <button
+                  onClick={handleLogout}
+                  className="bg-gradient-to-r from-purple-500 to-pink-500 font-serif hover:from-purple-700 hover:to-pink-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all"
+                >
+                  Logout
+                </button>
               </div>
             </div>
 
