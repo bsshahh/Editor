@@ -46,12 +46,11 @@ const Dashboard = () => {
             const userSubmission = submittedMap.get(test._id);
             // console.log(userSubmission);
             const isSubmitted = userSubmission?.submitted===true;
-            const isLive =
-              new Date(test.startTime) <= now && new Date(test.endTime) > now;
+            
             // console.log(userSubmission);
             if (isSubmitted) {
               completed.push({ ...test, ...userSubmission });
-            } else if (isLive) {
+            } else {
               upcoming.push(test); // Only push live tests
             }
           }

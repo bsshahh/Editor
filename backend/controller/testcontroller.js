@@ -11,8 +11,8 @@ export const getAvailableTests = async (req, res) => {
         {college: userCollege},
         {college: "ALL"},
       ],
-    //   startTime: { $lte: now },
-    //  endTime: { $gt: now },
+      startTime: { $lte: now },
+     endTime: { $gt: now },
     }).lean();
     // console.log(tests);
     res.status(200).json(tests);
