@@ -41,7 +41,7 @@ const AdminDashboard = () => {
     }
   };
   
-  const formatDateForInput = (date) => {
+  const formatDateForInput = (dateStr) => {
     const date = new Date(dateStr);
 
   const year = date.getFullYear();
