@@ -40,10 +40,16 @@ const AdminDashboard = () => {
       }
     }
   };
-  const formatDateForInput = (date) => {
-    
-    return new Date(date).toISOString();
+  const formatToIST = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+};
 
+  const formatDateForInput = (date) => {
+    const d = new Date(date);
+    return new Date(d.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }))
+    .toISOString()
+    .slice(0, 16);
   };
 
   const handleEditClick = (test) => {
@@ -243,13 +249,13 @@ const AdminDashboard = () => {
                 <p>
                   🕒 <span className="font-semibold">Start :</span>{" "}
                   <span className="text-indigo-900">
-                    {new Date(test.startTime).toLocaleString()}
+                    {formatToIST(test.startTime)}
                   </span>
                 </p>
                 <p>
                   ⏱️ <span className="font-semibold">End :</span>{" "}
                   <span className="text-indigo-900">
-                    {new Date(test.endTime).toLocaleString()}
+                    {formatToIST(test.startTime)}
                   </span>
                 </p>
               </div>
