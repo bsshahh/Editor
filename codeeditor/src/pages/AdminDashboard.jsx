@@ -45,7 +45,7 @@ const AdminDashboard = () => {
     const d = new Date(date);
   // const istOffset = 5.5 * 60; // IST is UTC+5:30
   // const istTime = new Date(d.getTime() + istOffset * 60000);
-  return d.toISOString().slice(0, 16);// Format: YYYY-MM-DDTHH:mm
+  return d.slice(0, 16);// Format: YYYY-MM-DDTHH:mm
   };
 
   const handleEditClick = (test) => {
